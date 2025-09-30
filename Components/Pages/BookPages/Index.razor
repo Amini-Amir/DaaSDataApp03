@@ -1,0 +1,48 @@
+@page "/books"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using Microsoft.EntityFrameworkCore
+@using BlazorApp03.Models
+@implements IAsyncDisposable
+@inject IDbContextFactory<dbDataContext> DbFactory
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="books/create">Create New</a>
+</p>
+
+<div>
+    <QuickGrid Class="table" Items="FilteredBooks" Pagination="pagination" Sortable="true">
+        <input @bind="filteredBookTitle" placeholder="Search by title" @bind:event="oninput"/>
+        <PropertyColumn Property="book => book.Title" Sortable="true" />
+        <PropertyColumn Property="book => book.Author" />
+        <PropertyColumn Property="book => book.Description" />
+        <PropertyColumn Property="book => book.PublishedDate" />
+
+        <TemplateColumn Context="book">
+            <a href="@($"books/edit?id={book.Id}")">Edit</a> |
+            <a href="@($"books/details?id={book.Id}")">Details</a> |
+            <a href="@($"books/delete?id={book.Id}")">Delete</a>
+        </TemplateColumn>
+    </QuickGrid>
+    <Paginator State="pagination" />
+</div>
+@code {
+    private dbDataContext context = default!;
+    PaginationState pagination = new() { ItemsPerPage = 10 };
+    
+    private string filteredBookTitle = string.Empty;
+    private IQueryable<Book> FilteredBooks => string.IsNullOrWhiteSpace(filteredBookTitle)
+        ? context.Book
+        : context.Book.Where(b => b.Title.Contains(filteredBookTitle));
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

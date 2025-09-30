@@ -1,0 +1,73 @@
+# Visual Studio / IDE
+.vs/
+.vscode/
+.idea/
+
+# Build outputs
+/bin/
+obj/
+out/
+artifacts/
+
+# Publish
+publish/
+*.Publish.xml
+
+# Rider
+*.sln.iml
+.idea/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.ntvs_analysis.dat
+*.vcxproj.user
+
+# ASP.NET Core / Blazor
+appsettings.Development.json
+appsettings.*.Local.json
+secrets.json
+# If using Blazor WASM, ignore build/wwwroot outputs if generated
+wwwroot/dist/
+wwwroot/_framework/wasm/  # optional, adjust if you check in framework files
+
+# Node / frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Logs, DB, temp
+*.log
+*.sqlite
+*.db
+*.db-shm
+*.db-wal
+*.pid
+tmp/
+temp/
+
+# Tooling files
+*.env
+*.local
+ScaffoldingReadMe.txt
+
+# JetBrains / ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# NOTE: .gitignore is not retroactive. If files/folders were already committed,
+# run these commands at the repository root to remove them from tracking (they
+# will remain on disk) and apply .gitignore:
+#   git rm -r --cached .
+#   git add .
+#   git commit -m "Apply .gitignore"
+#   git push
+# Ensure this .gitignore is at the repo root; paths are matched relative to it.

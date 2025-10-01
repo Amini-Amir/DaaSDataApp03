@@ -2,9 +2,9 @@ using BlazorApp04.Components;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-// Prefer App Service app setting "KVConnectionStringWebApp03" (can be a Key Vault reference).
+// Prefer App Service app setting "KVConnectionStringWebApp04" (can be a Key Vault reference).
 // Fall back to the local connection string named "dbDataContext".
-var connectionString = builder.Configuration["KVConnectionStringWebApp03"]
+var connectionString = builder.Configuration["KVConnectionStringWebApp04"]
     ?? builder.Configuration.GetConnectionString("dbDataContext")
     ?? throw new InvalidOperationException("Connection string not found. Provide 'KVConnectionStringWebApp03' app setting or 'dbDataContext' connection string.");
 
